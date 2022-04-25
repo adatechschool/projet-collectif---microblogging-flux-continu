@@ -20,6 +20,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->text('biographie');
+            $table->string('pp_img');
+        });
     }
 
 
