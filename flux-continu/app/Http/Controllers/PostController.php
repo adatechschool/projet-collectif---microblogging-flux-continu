@@ -14,7 +14,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //On récupère tous les Post
+        $posts = Post::latest()->get();
+
+        // On transmet les Post à la vue
+        return view("posts.index", compact("posts"));
     }
 
     /**
@@ -33,9 +37,26 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        // 1. La validation
+        $this->validate($request, [
+            'description' => 'bail|required|string|max:255',
+            "img_url" => 'bail|required|image|max:1024',
+            "user_id" => 'bail|required',
+        ]);
+
+        // 2. On upload l'image dans "/storage/app/public/posts"
+        $img_url = $request->picture->store("posts");
+
+        // 3. On enregistre les informations du Post
+        Post::create([
+            "description" => $request->description,
+            "img_url" => $request->img_url,
+            "user_id" => $request->user_id,
+        ]);
+
+        // 4. On retourne vers tous les posts
+        return redirect(route("posts.index"));
     }
 
     /**
