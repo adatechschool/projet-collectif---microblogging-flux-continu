@@ -43,6 +43,8 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'biographie' => 'Once upon a time',
+            'pp_img' => 'flux-continu/resources/images/serviettepp.png'
         ]);
 
         event(new Registered($user));
