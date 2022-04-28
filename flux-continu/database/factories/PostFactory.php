@@ -18,8 +18,8 @@ class PostFactory extends Factory
     {
         return [
             'description' => "Mon chat est trop mignon",
-            'img_url' => $this->faker->imageUrl(640, 480, 'cats'),
-            'user_id' => 1
+            'img_url' => "https://pbs.twimg.com/profile_images/1467283777177239563/36HU69Rz_400x400.jpg",
+            'user_id' => 1,
         ];
     }
     
